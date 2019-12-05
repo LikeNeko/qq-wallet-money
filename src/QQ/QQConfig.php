@@ -6,9 +6,7 @@
  * Time: 12:35 PM
  */
 
-namespace utils\pay\qq;
-
-use think\facade\App;
+namespace QQ;
 
 trait QQConfig
 {
@@ -27,7 +25,8 @@ trait QQConfig
      */
     public function price($price = 0.00)
     {
-        $price                     = floatTwo($price);
+        $price = sprintf('%2.f', $price);
+
         $this->config['total_fee'] = (string)($price * 100);
         return $this;
     }

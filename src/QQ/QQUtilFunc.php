@@ -5,7 +5,8 @@
  * Date: 2019/12/5
  * Time: 12:45 PM
  */
-namespace utils\pay\qq;
+namespace QQ;
+
 
 trait QQUtilFunc{
 

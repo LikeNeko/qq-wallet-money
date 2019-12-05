@@ -6,16 +6,7 @@
  * Time: 2:19 PM
  */
 
-namespace utils\pay\qq;
-
-use think\facade\App;
-use utils\NMath;
-use think\Db;
-use think\Exception;
-use think\facade\Log;
-
-$success = null;
-$error   = null;
+namespace QQ;
 
 class QQPay
 {
@@ -29,33 +20,28 @@ class QQPay
     /**
      * @var callable
      */
-    static $success_func = null;
+    private static $success_func = null;
     /**
      * @var callable
      */
-    static $error_func = null;
+    private static $error_func = null;
 
     public function __construct($config = [])
     {
         $this->config['input_charset'] = "UTF-8";
         $this->config['appid']         = '';
-//        $this->config['uin'] = '358051609';
 
         $this->config['mch_id']    = "";
         $this->config['nonce_str'] = md5(rand(1, 30000) . time());
 
-        $this->config['out_trade_no'] = NMath::orderId();
-//        $this->config['fee_type'] ='CNY';
+        $this->config['out_trade_no'] = self::orderId();
         $this->config['memo'] = '提现啦！';
-//        $this->config['check_name'] = 'FORCE_CHECK';
-//        $this->config['re_user_name'] = '刘莉军';
         $this->config['check_real_name'] = '0';
 
         $this->config['op_user_id']     = '';
         $this->config['op_user_passwd'] = '';
 
         $this->config['spbill_create_ip'] = '111.207.253.216';
-//        $this->config['notify_url'] = '';
 
 
         $this->config = array_merge($this->config, $config);
@@ -68,6 +54,7 @@ class QQPay
      * @param $success callable 传递一个闭包方法
      * @param $error   callable 传递一个闭包方法
      *
+     * @throws
      * @return string
      */
     public function send($success = null, $error = null)
@@ -76,7 +63,7 @@ class QQPay
             $this->createSign();
         }
         if ($this->config['total_fee'] == 0) {
-            throw new Exception("提现不能为0");
+            throw new QQException("提现金额不能为0");
         }
 
 
@@ -147,12 +134,13 @@ class QQPay
     /**
      * 创建sign
      *
+     * @throws
      * @return $this
      */
     private function createSign()
     {
         if (empty($this->key)) {
-            \exception('商户key未设置');
+            throw new QQException('商户key未设置');
         }
 
         ksort($this->config);

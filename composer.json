@@ -1,7 +1,7 @@
 {
   "name": "nekom/qq-wallet-money",
-  "description": "qq钱包打款",
-  "homepage": "",
+  "description": "qq小程序打款类，qq钱包打款适用，封装了加密算法，发送，处理逻辑",
+  "homepage": "https://github.com/LikeNeko/qq-wallet-money/",
   "type": "library",
   "license": "MIT",
   "authors": [

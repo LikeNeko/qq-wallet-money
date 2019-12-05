@@ -10,14 +10,14 @@ namespace QQ;
 
 trait QQConfig
 {
-    private $pay_url = '';
+    private $pay_url = 'https://api.qpay.qq.com/cgi-bin/epay/qpay_epay_b2c.cgi';
     private $key = '';
 
     private $cert_path = '';
     private $key_path = '';
 
     /**
-     * 分为单位
+     * 元为单位 如1.30元
      *
      * @param $price
      *
@@ -30,6 +30,20 @@ trait QQConfig
         $this->config['total_fee'] = (string)($price * 100);
         return $this;
     }
+
+    /**
+     * 同文档
+     *
+     * @param int $price
+     *
+     * @return $this
+     */
+    public function priceTo($price = 0)
+    {
+        $this->config['total_fee'] = $price;
+        return $this;
+    }
+
 
     public function openid($openid = '')
     {

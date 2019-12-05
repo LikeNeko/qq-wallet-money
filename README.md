@@ -1,16 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Neko
- * Date: 2019/12/5
- * Time: 4:40 PM
- */
+## 安装
 
-include '../src/QQ/QQConfig.php';
-include '../src/QQ/QQException.php';
-include '../src/QQ/QQUtilFunc.php';
-include '../src/QQ/QQPay.php';
+`composer require nekom/qq-wallet-money:dev-master`
 
+## Demo
+
+```php
 $key  = __DIR__.'/cert/key.pem';
 $cert = __DIR__.'/cert/cert.pem';
 
@@ -22,7 +16,7 @@ $obj = new \QQ\QQPay([
     'op_user_passwd' => md5('')
 ]);
 // 设置好商户的key
-$obj->setKey('litemob123litemob123litemob32101');
+$obj->setKey('');
 // 设置key.pem证书路径
 $obj->setKeyPath($key);
 // 设置cert.pem证书路径
@@ -84,8 +78,4 @@ $status = $obj->send(function ($info) use ($out) {
     // $out 是外部的参数，可以传进来
     var_dump($out);
 });
-
-
-
-
-
+```

@@ -32,6 +32,7 @@ class QQPay
         $this->config['appid']         = '';
 
         $this->config['mch_id']    = "";
+        $this->config['openid']    = "";
         $this->config['nonce_str'] = md5(rand(1, 30000) . time());
 
         $this->config['out_trade_no'] = self::orderId();
@@ -65,7 +66,12 @@ class QQPay
         if ($this->config['total_fee'] == 0) {
             throw new QQException("提现金额不能为0");
         }
-
+        if (!is_file($this->key_path)){
+            throw new QQException("商户key文件没找到");
+        }
+        if (!is_file($this->cert_path)){
+            throw new QQException("商户cert文件没找到");
+        }
 
         $data = $this->config;
 

@@ -69,6 +69,7 @@ $obj->error($error);
 
 // 你还可以这样写
 $status = $obj->send($success,$error);
+// $status 返回 'ok'  或者 $status => 'no'
 
 // 只监听成功的回调
 $status = $obj->send(function ($info) use ($out) {
@@ -78,4 +79,10 @@ $status = $obj->send(function ($info) use ($out) {
     // $out 是外部的参数，可以传进来
     var_dump($out);
 });
+
+// 每次send返回的所有信息
+$obj->result;
+
+// 也可以手动设置配置
+$obj->config['openid'] = 123;
 ```

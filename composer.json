@@ -1,0 +1,21 @@
+{
+  "name": "nekom/qq-wallet-money",
+  "description": "qq钱包打款",
+  "homepage": "",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Neko",
+      "homepage": "https://nekom.cc"
+    }
+  ],
+  "require": {
+    "php":">=7.0"
+  },
+  "require-dev" : {},
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {"QQ\\": "src/QQ"}
+  }
+}
